@@ -1,0 +1,47 @@
+<!doctype html>
+<!-- The DOCTYPE declaration above will set the     -->
+<!-- browser's rendering engine into                -->
+<!-- "Standards Mode". Replacing this declaration   -->
+<!-- with a "Quirks Mode" doctype is not supported. -->
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link type="text/css" rel="stylesheet" href="Anna.css">
+    <title>Web Application Starter Project</title>    
+    <script type="text/javascript" language="javascript" src="anna/anna.nocache.js"></script>
+  </head>
+  <body>
+    <noscript>
+      <div style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+        Your web browser must have JavaScript enabled
+        in order for this application to display correctly.
+      </div>
+    </noscript>
+	<header>
+    	<h1>Web Application Starter Project</h1>
+	</header>
+	<main>
+		<section>
+		    <table align="center">
+		      <tr>
+		        <td colspan="2" style="font-weight:bold;">Please enter your name:</td>        
+		      </tr>
+		      <tr>
+		        <td id="nameFieldContainer"></td>
+		        <td id="sendButtonContainer"></td>
+		      </tr>
+		      <tr>
+		        <td colspan="2" style="color:red;" id="errorLabelContainer"></td>
+		      </tr>
+		    </table>
+    </section>
+    <section class="websocket-area">
+	    <div id="wsContainer">
+			
+		</div>
+	</section>
+	</main>
+  </body>
+</html>

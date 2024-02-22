@@ -1,0 +1,53 @@
+# Compiled Java classes
+bin/
+target/
+build/
+out/
+
+# GWT compiled output
+war/WEB-INF/deploy/
+war/<module_name>/deferredjs/
+gwt-unitCache/
+www-test/
+war/WEB-INF/classes
+
+# Logging files
+*.log
+
+# GWT Eclipse plugin
+.gwt/
+gwt-unitCache/
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA project files
+.idea/
+*.iml
+*.iws
+
+# NetBeans project files
+nbproject/private/
+build/web/WEB-INF/classes/
+
+# VS Code project files
+.vscode/
+
+# Mac OS X specific files
+.DS_Store
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Temporary files
+temp/
+tmp/
+*.tmp
+*.bak
+
+# Virtual machine crash logs
+hs_err_pid*
