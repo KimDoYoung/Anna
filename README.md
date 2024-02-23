@@ -53,7 +53,7 @@
     - 메세지의 종류에 따라서 화면에 동작한다. 현재 alert로 구현
     - 일정시간이 지나면 예기치 못한 원인으로 websocket이 close상태가된다. 이를 방지하기 위해서 3초후에 다시 접속한다.
     
-    ```javascript
+```javascript
 public native void setupWebSocket() /*-{
 	  //debugger;	
 	  $wnd.ws = new WebSocket("ws://localhost:8888/anna/broadcast");
@@ -95,7 +95,7 @@ public native void setupWebSocket() /*-{
 	    console.error("웹소켓 error !!!"+error);
 	  };
 	}-*/;    
-    ```
+```
 ### 서버쪽 BroadcastServiceImpl.java
 
 - WsSessionManager를 작성 : 접속한 session을 관리함.
