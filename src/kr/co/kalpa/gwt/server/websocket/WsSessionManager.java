@@ -11,6 +11,7 @@ import javax.websocket.Session;
 public class WsSessionManager {
 
 	private Map<String, SessionInfo> sessionMap;
+	
 	public WsSessionManager() {
 		sessionMap = new HashMap<>();
 	}
@@ -55,5 +56,18 @@ public class WsSessionManager {
 			list.add(entry.getValue());
 		}
 		return list;
+	}
+	/**
+	 * session을 관리대상에서 삭제한다
+	 * @param session
+	 */
+	public void remove(Session session) {
+		if(session == null) {
+			return;
+		}
+		String sessionId = session.getId();
+		if(sessionMap.containsKey(sessionId)) {
+			sessionMap.remove(sessionId);
+		}
 	}
 }

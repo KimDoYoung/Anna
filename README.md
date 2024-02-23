@@ -85,7 +85,11 @@ public native void setupWebSocket() /*-{
 	     }
 	  };
 	  $wnd.ws.onclose = function() {
-	    console.debug("웹소켓 close!");
+	    console.debug(new Date() + " 웹소켓 close!");
+        setTimeout(function() {
+            // Java 객체의 메소드를 호출
+            that.@kr.co.kalpa.gwt.client.Anna::setupWebSocket()();
+        }, 3000); // 3초 후 재연결 시도    	    
 	  };
 	  $wnd.ws.onerror = function(error) {
 	    console.error("웹소켓 error !!!"+error);

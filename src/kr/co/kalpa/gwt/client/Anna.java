@@ -1,7 +1,5 @@
 package kr.co.kalpa.gwt.client;
 
-import kr.co.kalpa.gwt.server.websocket.WsMessage;
-import kr.co.kalpa.gwt.shared.FieldVerifier;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,6 +15,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+
+import kr.co.kalpa.gwt.shared.FieldVerifier;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -176,6 +176,7 @@ public class Anna implements EntryPoint {
 	
 	
 	public native void setupWebSocket() /*-{
+	  var that = this; // Java 객체 참조를 저장
 	  //debugger;	
 	  $wnd.ws = new WebSocket("ws://localhost:8888/anna/broadcast");
 	  $wnd.ws.onopen = function() {
@@ -194,7 +195,7 @@ public class Anna implements EntryPoint {
 	  	console.log(message);
 	  	 var data = message.data;
 	     var wsMsg = JSON.parse(data);
-	     console.debug('client 받은 메세지'+wsMsg);
+	     console.debug('client 받은 메세지 :' + wsMsg);
 	     if(wsMsg.command == 'alarm'){
 	     	var alarmText = wsMsg.contents.join("\n");
 	     	console.log(alarmText);
@@ -210,8 +211,8 @@ public class Anna implements EntryPoint {
         console.log('WebSocket disconnected. Attempting to reconnect...');
         setTimeout(function() {
             // Java 객체의 메소드를 호출
-            self.@kr.co.kalpa.gwt.client.Anna::setupWebSocket()();
-        }, 3000); // 3초 후 재연결 시도
+            that.@kr.co.kalpa.gwt.client.Anna::setupWebSocket()();
+        }, 3000); // 3초 후 재연결 시도        
       };	  
 	  $wnd.ws.onerror = function(error) {
 	    console.error("웹소켓 error !!!"+error);

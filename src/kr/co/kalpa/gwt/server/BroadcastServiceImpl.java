@@ -19,7 +19,7 @@ import kr.co.kalpa.gwt.server.websocket.WsMessage;
 import kr.co.kalpa.gwt.server.websocket.WsSessionManager;
 
 /**
- * The server-side implementation of the RPC service.
+ * RPC 서비스의 서버 측 구현입니다. 웹 소켓에서 사용합니다.
  */
 @ServerEndpoint("/anna/broadcast")
 @SuppressWarnings("serial")
@@ -27,9 +27,6 @@ public class BroadcastServiceImpl extends RemoteServiceServlet implements Broadc
 	
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 	private static final WsSessionManager wsManager = new WsSessionManager();
-//	public BroadcastServiceImpl() {
-//		wsManager = new WsSessionManager();
-//	}
 	
     @OnOpen
     public void onOpen(Session session) {
@@ -44,11 +41,12 @@ public class BroadcastServiceImpl extends RemoteServiceServlet implements Broadc
             // 클라이언트로부터 받은 JSON 메시지를 파싱합니다.
             WsMessage wsMessage= objectMapper.readValue(message, WsMessage.class);
             System.out.println("웹소켓 메세지받음: "+wsMessage.toString());
-//            // 세션매니저에 저장
+            // 세션매니저에 저장
             wsManager.addSession(session, wsMessage.getSender());
             
             //명령에 따른 처리 
             String command = wsMessage.getCommand();
+          
             if("status".equals(command)) { // 현재 접속된 모든 사용자들 리스트
             	WsMessage sendMessage = new WsMessage();
             	sendMessage.setCommand("status");
@@ -99,44 +97,13 @@ public class BroadcastServiceImpl extends RemoteServiceServlet implements Broadc
     public void onClose(Session session) {
         System.out.println("브라우저가 닫히면 웹소켓이 끊어짐");
         System.out.println("웹소켓 연결 닫힘: " + session.getId());
+        wsManager.remove(session);
     }
 	
 	@Override
 	public String broadcastServer(String name) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 		return "아~~ 왜~ 이런 짓을 했을까?";
-	}
-
-//	public String greetServer(String input) throws IllegalArgumentException {
-//		// Verify that the input is valid. 
-//		if (!FieldVerifier.isValidName(input)) {
-//			// If the input is not valid, throw an IllegalArgumentException back to
-//			// the client.
-//			throw new IllegalArgumentException("Name must be at least 4 characters long");
-//		}
-//
-//		String serverInfo = getServletContext().getServerInfo();
-//		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
-//
-//		// Escape data from the client to avoid cross-site script vulnerabilities.
-//		input = escapeHtml(input);
-//		userAgent = escapeHtml(userAgent);
-//
-//		return "Hello, " + input + "!<br><br>I am running " + serverInfo + ".<br><br>It looks like you are using:<br>"
-//				+ userAgent;
-//	}
-
-	/**
-	 * 클라이언트로부터 받은 데이터를 이스케이프 처리하여 XSS(교차 사이트 스크립팅) 취약점을 방지합니다.
-	 * 
-	 * @param html 이스케이프 처리할 HTML 문자열
-	 * @return 이스케이프 처리된 문자열
-	 */
-	private String escapeHtml(String html) {
-		if (html == null) {
-			return null;
-		}
-		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 	}
 
 }
